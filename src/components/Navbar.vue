@@ -2,7 +2,7 @@
   <div class="py-5 px-5 flex justify-between w-full">
     <div class="left flex w-full justify-start m-0">
       <img
-        class="h-10 mr-4 w-auto"
+        class="h-10 mr-4 w-auto select-none"
         src="https://res.cloudinary.com/segundazo/image/upload/v1646694599/NUEVOS/MATERIAL%20GRAFICO/LOGO_SVG_Mesa_de_trabajo_1_c3thsb.svg"
         alt=""
       />
@@ -28,7 +28,7 @@
         </form>
       </div>
     </div>
-    <div class="rigth flex w-auto m-0">
+    <div class="rigth flex w-auto m-0 select-none">
       <div class="bt-acount flex py-2 px-5 mr-4">
         <svg
           xmlns="http://www.w3.org/2000/svg"

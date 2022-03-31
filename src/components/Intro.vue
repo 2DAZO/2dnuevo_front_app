@@ -79,18 +79,35 @@
     <div class="intro-top h-full">
       <Carousel
         class="h-full"
+        :autoplay="3000"
         :items-to-show="1.65"
-        
-        :wrap-around="true"
       >
         <Slide class="" v-for="product in products" :key="product.top">
           <div class="productsTop" >
-            <img :src="product.mainImg" alt="" class="imgProductTop mb-5" />
+            <img :src="product.mainImg" alt="" class="imgProductTop h-auto  mb-5" />
             <div class="w-full borderText mb-5" ></div>
-            <div class="textProduct flex flex-col">
-              <p class="nameProduct font-medium">{{ product.name }}</p>
-              <div>
-                <p>{{ product.price }}</p>
+            <div class="flex flex-col">
+              <p class="nameProduct font-medium">{{ product.name }}</p> 
+              <div class="mt-3 flex justify-between">
+                <div class="flex w-max m-0">
+                  <p class=" font-bold w-max mr-2 price" v-if="product.discount == false">${{ product.price }}
+                </p>
+                <p class=" font-bold w-max mr-2 price" v-else>${{ product.priceDiscount }}
+                </p>
+                <p class="w-max line-through text-xs priceDiscount" v-if="product.discount == true">
+                  ${{product.price}}
+                </p>
+                </div>
+                <p class="w-max font-bold off" v-if="product.discount == true">
+                  % {{product.percentage}} OFF
+                </p>
+              </div>
+              <div class="flex mt-3 justify-between">
+                <div class="w-max store flex flex-col items-start m-0">
+                  <p class="text-xs w-max">Vendido por</p>
+                  <img src="https://seeklogo.com/images/E/exito-logo-4AC4CFF6A0-seeklogo.com.png" alt="">
+                </div>
+                <router-link to="" class="bt-toBuy text-sm px-10 py-3 w-max m-0">Comprar</router-link>
               </div>
             </div>
           </div>
@@ -149,7 +166,7 @@ export default {
     getStatistics() {
       return this.$store.state.statistics;
     },
-  },
+  }
 };
 </script>
 
@@ -244,7 +261,7 @@ export default {
 .productsTop {
   padding: 20px;
   width: 100%;
-  max-width: 350px;
+  max-width: 360px;
   height: 100%;
   box-shadow: 0px 0px 12px #e1e1e1;
   border-radius: 10px;
@@ -253,7 +270,7 @@ export default {
 .imgProductTop {
   border-radius: 10px;
   object-fit: cover;
-  height: 70%;
+  height: 65%;
 }
 
 .borderText{
@@ -261,15 +278,35 @@ export default {
 }
 
 .nameProduct{
-  display: -webkit-box;
-  -webkit-line-clamp: 1;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
+    color: #666;
+    margin-top: 12px;
+    max-height: 1em;
+    overflow: hidden;
+    word-break: break-all;
+    margin-top: 0 !important;
+    width: fit-content;
 }
 
-.textProduct{
-  
+.price{
+  color: var(--morado);
 }
+
+.priceDiscount{
+  color: var(--gris-oscuro);
+}
+
+.off{
+  color: var(--verde);
+}
+
+.store img{
+  border-radius: 50px;
+  object-fit: cover;
+  height: 28px;
+  width: 95px;
+}
+
+
 
 @media (min-width: 1300px) {
   .text-one img {
