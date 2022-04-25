@@ -14,6 +14,8 @@
       </template>
     </Carousel>
   </div>
+
+  <!-- TODO Realizar maquetacion -->
 </template>
 
 <script>
