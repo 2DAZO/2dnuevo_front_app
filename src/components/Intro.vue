@@ -170,7 +170,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .carousel__prev--in-active,
 .carousel__next--in-active {
   display: none;

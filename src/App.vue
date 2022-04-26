@@ -22,9 +22,9 @@ margin: 0;
 padding: 0;
 box-sizing: border-box;
 font-family: 'Poppins', sans-serif;
-max-width: 1300px;
+/* max-width: 1300px;
 width: 100%;
-margin: auto;
+margin: auto; */
 }
 
 </style>

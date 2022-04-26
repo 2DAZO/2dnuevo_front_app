@@ -12,7 +12,7 @@
     "slick-vuejs": "^1.0.9",
     "vue": "^3.2.13",
     "vue-router": "^4.0.3",
-    "vue3-carousel": "^0.1.36",
+    "vue3-carousel": "^0.1.38",
     "vuex": "^4.0.0"
   },
   "devDependencies": {

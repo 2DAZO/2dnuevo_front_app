@@ -1,10 +1,14 @@
 <template>
-  <div>
-    <Navbar/>
-    <Intro/>
-    <Buscador/>
-    <Banners/>
-    <SeccionGeneral/>
+  <div class="home-container w-full">
+    <div class="home-content">
+      <Navbar/>
+      <Intro/>
+      <div class="w-full flex justify-center">
+        <Buscador/>
+      </div>
+      <Banners/>
+      <SeccionGeneral/>
+    </div>
   </div>
 </template>
 
@@ -27,5 +31,8 @@ export default {
 </script>
 
 <style scoped>
-
+.home-content{
+  max-width: 1300px;
+  margin: 0 auto;
+}
 </style>
