@@ -9,7 +9,7 @@
       >
         <Slide class="" v-for="banner in banners" :key="banner.id">
           <div class="h-64" >
-            <img :src="banner.img" alt="" class="h-full object-cover rounded-xl" />
+            <img :src="banner.img" alt="" class="img-banner h-full px-2 object-cover rounded-xl" />
           </div>
         </Slide>
         <template #addons class="botones">
@@ -47,7 +47,7 @@ export default {
       bannersService.get()
         .then((response) => {
           this.banners = response.data;
-          console.log(this.banners)
+          
         })
         .catch((e) => console.log(e));
     },
@@ -61,5 +61,9 @@ export default {
     box-sizing: content-box;
     border: 5px solid white;
     background: var(--verde) !important;
+}
+
+.img-banner{
+  width: 785px;
 }
 </style>

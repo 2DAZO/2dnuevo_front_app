@@ -8,6 +8,7 @@
       </div>
       <Banners/>
       <SeccionGeneral/>
+      <Stores/>
     </div>
   </div>
 </template>
@@ -18,6 +19,7 @@ import Intro from "../components/Intro.vue"
 import Buscador from "../components/Buscador.vue"
 import Banners from "../components/Banners.vue"
 import SeccionGeneral from "../components/SeccionGeneral.vue"
+import Stores from "../components/Stores.vue"
 export default {
   name: 'HomeView',
   components: {
@@ -25,7 +27,8 @@ export default {
     Intro,
     Buscador,
     Banners,
-    SeccionGeneral
+    SeccionGeneral,
+    Stores
   }
 }
 </script>

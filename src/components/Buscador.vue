@@ -168,7 +168,7 @@ export default {
 
   async mounted() {
     await this.$store.dispatch("getShops");
-    console.log(this.shops)
+    
   },
 
   computed: {

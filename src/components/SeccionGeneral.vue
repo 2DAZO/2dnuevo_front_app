@@ -25,7 +25,19 @@
             <div class="p-3">
               <img class="rounded-lg" :src="product.mainImg" alt="">
             </div>
-            <div></div>
+
+            <div class="px-4 pb-4">
+              <div class="mb-3 w-full borderText" ></div>
+              <div class="h-full">
+                <p class="name-product font-medium">{{ product.name }}</p>
+                <p class="text-left text-sm line-through text-gray-400 font-light">$ {{ product.price }}</p>
+                <div class="mb-2 flex justify-between items-center">
+                  <p class="discount-product text-left text-2xl font-bold">$ {{ product.priceDiscount }}</p>
+                  <p class="off-profuct text-sm font-bold">100% OFF</p>
+                </div>
+                <button class="button-buy py-2 w-full rounded-lg text-white">Comprar</button>
+              </div>
+            </div>
           </div>
         </Slide>
         <template #addons>
@@ -82,6 +94,7 @@ export default {
       productsServices.get()
         .then((response) => {
           this.products = response.data;
+          console.log(response.data)
         })
         .catch((e) => console.log(e));
     },
@@ -135,5 +148,29 @@ export default {
 
 .tag-logo img{
   width: 100px;
+}
+
+.borderText{
+  border-bottom: 2px solid var(--morado);
+}
+
+.name-product{
+  max-width: 200px;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+  color: #666;
+}
+
+.discount-product{
+  color: var(--morado);
+}
+
+.button-buy{
+  background: var(--morado);
+}
+
+.off-profuct{
+  color: var(--verde);
 }
 </style>
