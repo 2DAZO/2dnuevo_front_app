@@ -1,10 +1,24 @@
 <template>
-  <div class="pt-2 pb-10">
+  <div class="app-container">
+    <Navbar/>
     <router-view/>
+    <Footer />
   </div>
 </template>
 
-<style>
+<script>
+import Navbar from "./components/layout/Navbar.vue"
+import Footer from "./components/layout/Footer.vue"
+
+export default {
+  components:{
+    Navbar,
+    Footer
+  }
+}
+</script>
+
+<style >
 
 :root{
   --verde: #19D078;
@@ -25,6 +39,11 @@ font-family: 'Poppins', sans-serif;
 /* max-width: 1300px;
 width: 100%;
 margin: auto; */
+}
+
+.app-container{
+  display: grid;
+  grid-template-rows: auto 1fr auto;
 }
 
 </style>

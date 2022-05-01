@@ -1,7 +1,6 @@
 <template>
   <div class="home-container w-full">
     <div class="home-content">
-      <Navbar/>
       <Intro/>
       <div class="w-full flex justify-center">
         <Buscador/>
@@ -14,7 +13,7 @@
 </template>
 
 <script>
-import Navbar from "../components/Navbar.vue"
+
 import Intro from "../components/Intro.vue"
 import Buscador from "../components/Buscador.vue"
 import Banners from "../components/Banners.vue"
@@ -23,7 +22,6 @@ import Stores from "../components/Stores.vue"
 export default {
   name: 'HomeView',
   components: {
-    Navbar,
     Intro,
     Buscador,
     Banners,

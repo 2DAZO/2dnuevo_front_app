@@ -8,9 +8,9 @@
     <div>
       <Carousel :settings="settings" :breakpoints="breakpoints" wrap-around="true">
         <Slide class="" v-for="(product, index) in products" :key="index">
-          <div @click="filterProducts" class="carousel__item flex justify-center items-end">
-            <div class="comercio-logo rounded-full">
-
+          <div @click="redirectStore(product.name)" class="carousel__item flex justify-center items-end cursor-pointer">
+            <div class="comercio-logo flex justify-center items-center rounded-full">
+              <img class="rounded-full" :src="product.img" alt="">
             </div>
             <div class="comercio-content p-3 flex flex-col items-center justify-end rounded-lg">
               <p class="text-2xl font-bold">{{ product.name }}</p>
@@ -26,7 +26,7 @@
   </div>
 </template>
 <script>
-
+import router from '@/router'
 import { Carousel, Navigation, Slide } from "vue3-carousel";
 import "vue3-carousel/dist/carousel.css";
 
@@ -39,14 +39,14 @@ export default {
   data() {
     return {
       products:[
-        {name: "Puma", category: "Ropa y accesorios"},
-        {name: "Exito", category: "General"},
-        {name: "Alkosto", category: "General"},
-        {name: "Logitech G", category: "Tecnologia"},
-        {name: "Puma", category: "Ropa y accesorios"},
-        {name: "Exito", category: "General"},
-        {name: "Alkosto", category: "General"},
-        {name: "Logitech G", category: "Tecnologia"},
+        {name: "Puma", category: "Ropa y accesorios", img: "http://placeimg.com/640/480/cats"},
+        {name: "Exito", category: "General", img: "http://placeimg.com/640/480/cats"},
+        {name: "Alkosto", category: "General", img: "http://placeimg.com/640/480/cats"},
+        {name: "Logitech G", category: "Tecnologia", img: "http://placeimg.com/640/480/cats"},
+        {name: "Puma", category: "Ropa y accesorios", img: "http://placeimg.com/640/480/cats"},
+        {name: "Exito", category: "General", img: "http://placeimg.com/640/480/cats"},
+        {name: "Alkosto", category: "General", img: "http://placeimg.com/640/480/cats"},
+        {name: "Logitech G", category: "Tecnologia", img: "http://placeimg.com/640/480/cats"},
       ],
 
       settings: {
@@ -67,6 +67,12 @@ export default {
           snapAlign: "start",
         },
       },
+    }
+  },
+
+  methods: {
+    redirectStore(name){
+      router.push(`/store/${name.toLowerCase()}`)
     }
   },
 }
@@ -98,9 +104,14 @@ export default {
   .comercio-logo{
     width: 100px;
     height: 100px;
-    border: 4px solid rgb(235, 235, 235);
-    background: red;
+    border: 4px solid white;
+    box-shadow: 0px 0px 12px #e1e1e1;
     position: absolute;
     top: 0;
+  }
+
+  .comercio-logo img{
+    width: 90px;
+    height: 90px;
   }
 </style>
