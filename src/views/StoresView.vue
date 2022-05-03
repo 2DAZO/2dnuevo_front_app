@@ -106,9 +106,6 @@ export default {
 .store-content{
   max-width: 1300px;
   margin: 0 auto;
-}
-
-.store-conten{
   display: grid;
   grid-template-rows: auto 1fr;
 }

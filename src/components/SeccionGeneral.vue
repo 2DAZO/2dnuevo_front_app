@@ -35,7 +35,7 @@
                   <p class="discount-product text-left text-2xl font-bold">$ {{ product.priceDiscount }}</p>
                   <p class="off-profuct text-sm font-bold">100% OFF</p>
                 </div>
-                <button class="button-buy py-2 w-full rounded-lg text-white">Comprar</button>
+                <button @click="viewProduct(product.id)" class="button-buy py-2 w-full rounded-lg text-white">Comprar</button>
               </div>
             </div>
           </div>
@@ -54,6 +54,7 @@
 import productsServices from "../services/products/productsService";
 import { Carousel, Navigation, Slide } from "vue3-carousel";
 import "vue3-carousel/dist/carousel.css";
+import router from '@/router'
 
 export default {
   name: "SeccionGeneral",
@@ -105,6 +106,10 @@ export default {
           return product.top == false
         }
       )
+    },
+
+    viewProduct(id){
+      router.push(`/product/${id}`)
     }
 
   }

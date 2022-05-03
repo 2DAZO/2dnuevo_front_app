@@ -107,7 +107,7 @@
                   <p class="text-xs w-max">Vendido por</p>
                   <img src="https://seeklogo.com/images/E/exito-logo-4AC4CFF6A0-seeklogo.com.png" alt="">
                 </div>
-                <router-link to="" class="bt-toBuy text-sm px-10 py-3 w-max m-0">Comprar</router-link>
+                <button @click="viewProduct(product.id)" class="bt-toBuy text-sm px-10 py-3 w-max m-0">Comprar</button>
               </div>
             </div>
           </div>
@@ -123,6 +123,7 @@
 import { Carousel, Navigation, Slide } from "vue3-carousel";
 import "vue3-carousel/dist/carousel.css";
 import productsServices from "../services/products/productsService";
+import router from '@/router'
 export default {
   name: "Intro",
   components: {
@@ -160,6 +161,10 @@ export default {
         })
         .catch((e) => console.log(e));
     },
+
+    viewProduct(id){
+      router.push(`/product/${id}`)
+    }
   },
 
   computed: {
