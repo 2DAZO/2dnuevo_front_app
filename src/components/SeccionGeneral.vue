@@ -146,13 +146,13 @@ export default {
 
 .tag-logo{
   width: max-content;
-  top: 2px;
+  top: 10px;
   right: 5px;
   position: absolute;
 }
 
 .tag-logo img{
-  width: 100px;
+  width: 70px;
 }
 
 .borderText{
