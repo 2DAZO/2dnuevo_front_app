@@ -2,33 +2,37 @@
   <div class="product-container">
     <div class="product-content">
       <div class="product-secction mb-20">
-        <div class="card-container p-5">
-          <div class="card rounded-lg">
+        <div class="card-container p-5 flex justify-center items-center">
+          <div class="card py-10 rounded-lg">
             <Carousel :settings="settings" :breakpoints="breakpoints" :wrap-around="true">
               <Slide class="" v-for="product in products" :key="product.id">
                 <div class="carousel__item pt-2">
                   <img class="rounded-lg" :src="product.mainImg" alt="">
                 </div>
               </Slide>
-              <template #addons>
+              <template class="navigation-container" #addons>
                 <Navigation />
               </template>
             </Carousel>
-            <div class="galery p-5 flex justify-between">
-              <div class="galery-content rounded-lg bg-blue-500"></div>
-              <div class="galery-content rounded-lg bg-blue-500"></div>
-              <div class="galery-content rounded-lg bg-blue-500"></div>
-              <div class="galery-content rounded-lg bg-blue-500"></div>
-            </div>
           </div>
         </div>
         <div class="info-container p-5">
-          <p class="mb-5 text-2xl font-semibold">TV SAMSUNG 65" Pulgadas 165.1 cm 65AU8000 4K-UHD LED Plano Smart TV</p>
-          <p class="text-3xl font-bold" style="color: var(--morado)">$ 3.450.600</p>
-          <p class="mb-5 text-sm" >Cualquier medio de pago</p>
-          <p class="" style="color: var(--morado)">Garantía del producto</p>
-          <p class="mb-5 text-sm">Tienes 30 días desde que recibes el producto para devolverlo. ¡No importa el motivo! </p>
-          <p class="mb-5" style="color: var(--morado)">Tiempo de envio: <strong>2 dias habiles</strong></p>
+          <p class="mb-5 text-2xl font-semibold">{{currentProduct.name}}</p>
+          <p class="w-max line-through text-lg priceDiscount text-gray-500" v-if="currentProduct.discount == true"> ${{currentProduct.price}} </p>
+          <div class="flex items-center">
+            <p class="text-3xl font-bold" style="color: var(--morado)" v-if="currentProduct.discount == false">$ {{currentProduct.price}}</p>
+            <p class="text-3xl font-bold" style="color: var(--morado)" v-else>$ {{currentProduct.priceDiscount}}</p>
+            <p class="ml-5 font-bold text-lg" style="color: var(--verde)" v-if="currentProduct.discount == true"> % {{currentProduct.percentage}} OFF</p>
+          </div>
+          <p class="mb-5" >Cualquier medio de pago</p>
+          <p class="text-lg" style="color: var(--morado)">Garantía del producto</p>
+          <p class="mb-5">Tienes 30 días desde que recibes el producto para devolverlo. ¡No importa el motivo! </p>
+          <p class="font-semibold" style="color: var(--verde)">Tenemos:</p>
+          <div class="mb-5 flex">
+            <p class="text-lg" style="color: var(--morado)">Disponibilidad local y nacional</p>
+            <p class="mx-5" style="color: var(--verde)">|</p>
+            <p class="text-lg" style="color: var(--morado)">Envio gratis localmente</p>
+          </div>
           <button class="mb-2 w-full p-2 text-white rounded-lg" style="background: var(--morado)">Comprar Ahora</button>
           <div class="mb-5 flex" >
             <select class="mr-5 p-2 rounded-lg" style="border: 1px solid var(--verde); color: var(--verde)" name="count" id="count">
@@ -49,27 +53,35 @@
                 <p>Productos</p>
               </div>
               <div class="grid justify-end">
-                <p class="text-2xl text-center font-bold">4.5/5</p>
-                <p>Calificacion</p>
+                <div class="py-2 px-4 flex items-center rounded-lg cursor-pointer" style="border: 1px solid var(--morado)">
+                  <svg class="w-6 h-6" fill="none" stroke="var(--morado)" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 10h4.764a2 2 0 011.789 2.894l-3.5 7A2 2 0 0115.263 21h-4.017c-.163 0-.326-.02-.485-.06L7 20m7-10V5a2 2 0 00-2-2h-.095c-.5 0-.905.405-.905.905 0 .714-.211 1.412-.608 2.006L7 11v9m7-10h-2M7 20H5a2 2 0 01-2-2v-6a2 2 0 012-2h2.5"></path></svg>
+                  <div class="ml-2 text-center">
+                    <p class="text-sm font-semibold leading-none">500</p>
+                    <p class="font-semibold leading-none">Me encantó</p>
+                  </div>
+                </div>
               </div>
             </div>
-            <p class="text-sm" style="color: var(--verde)">Ver más productos del comercio</p>
+            <div class="flex justify-between">
+              <p class="text-sm cursor-pointer" style="color: var(--verde)">Ver más productos del comercio</p>
+              <p class="text-sm cursor-pointer" style="color: var(--morado)">Estoy inconforme</p>
+            </div>
           </div>
         </div>
       </div>
       <div class="specifications-container mb-10">
         <div class="specifications-title p-5 flex justify-between" >
           <p>Especificaciones</p>
-          <button class="py-2 px-4 rounded-lg" style="background: var(--morado)"></button>
+          <button @click="toggleInfo" class="py-2 px-4 rounded-lg" style="background: var(--morado)"></button>
         </div>
-        <div class="specifications-content" >
+        <div class="specifications-content" :class="toggleClass">
           <div class="specification grid" v-for="specification in this.specifications" :key="specification.title">
             <p class="text-lg font-semibold">{{ specification.title }}</p>
             <p class="text-gray-500">{{ specification.description }}</p>
           </div>
         </div>
       </div>
-      <div class="comments-container mb-20">
+      <!-- <div class="comments-container mb-20">
         <div class="comments-title p-5 flex justify-between">
           <p>Sobre este producto</p>
           <button class="py-2 px-4 rounded-lg" style="background: var(--morado)"></button>
@@ -96,10 +108,10 @@
             <button class="py-1 px-6 w-max text-white font-semibold rounded-lg" style="background: var(--morado)">Enviar</button>
           </div>
         </div>
-      </div>
+      </div> -->
       <div class="products-container">
         <p class="mb-10 text-2xl font-semibold">Mas productos del comercio</p>
-        <Carousel :settings="settings2" :breakpoints="breakpoints2" wrap-around="true">
+        <Carousel :settings="settings2" :breakpoints="breakpoints2" :wrap-around="true">
           <Slide class="" v-for="product in products" :key="product.id">
             <div @click="filterProducts" class="carousel__item">
               <div class="tag-store">
@@ -198,6 +210,29 @@ export default {
       {title: "Rango Tamaño de Pantalla", description: "6.1 a 8 pulgadas"},
       {title: "Rango Bateria", description: "3001 a 3500 mAh"},
     ],
+
+    currentProduct: {
+      name: "Nevera Whirlpool 500 L Auto - descongelador autonomo",
+      price: "493.000",
+      discount: true,
+      priceDiscount: "355.000",
+      percentage: 23,
+      paymentMethod: [],
+      warranty: "warranty 1",
+      shippingAvailabilit: [],
+      freeShipping: [],
+      whatsApp: "1-700-807-3938",
+      specifications: "specifications 1",
+      data: "data 1",
+      rating: 95,
+      top: true,
+      caregory: "caregory 1",
+      mainImg: "http://placeimg.com/640/480/technics",
+      id: "1"
+    },
+
+    toggleStatus: false,
+    toggleClass: "close"
   }),
 
   async mounted() {
@@ -215,6 +250,16 @@ export default {
 
     viewProduct(id){
       router.push(`/product/${id}`)
+    },
+
+    toggleInfo(){
+      this.toggleStatus = !this.toggleStatus
+      
+      if (this.toggleStatus) {
+        this.toggleClass = "open"
+      } else{
+        this.toggleClass = "close"
+      }
     }
   },
 }
@@ -227,18 +272,19 @@ export default {
 
   .product-secction{
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 55% 45%;
   }
 
   .card{
+    max-width: 600px;
     border: 5px solid white;
     box-shadow: 0px 0px 12px #e1e1e1;
   }
 
   .carousel__item {
-    height: 350px;
+    height: 400px;
     width: 100%;
-    max-width: 450px;
+    max-width: 500px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -250,6 +296,15 @@ export default {
     
   }
 
+  /* .navigation-container .carousel__prev, .carousel__next {
+    background-color: rgba(246, 246, 246, 1) ;
+    box-shadow: 0px 0px 12px #e1e1e1;
+  } */
+
+  /* .navigation-container .carousel__prev, .carousel__next .carousel__icon  {
+    background-color: rgba(246, 246, 246, 1);
+    box-shadow: 0px 0px 12px #e1e1e1;
+  } */
 
   .galery-content{
     width: 100px;
@@ -276,15 +331,15 @@ export default {
   }
 
   .products-container .carousel__item {
-  height: 350px;
-  width: 100%;
-  max-width: 250px;
-  border-radius: 8px;
-  display: grid;
-  grid-template-rows: auto 1fr;
-  box-shadow: 0px 0px 12px #e1e1e1;
-  position: relative;
-}
+    height: 350px;
+    width: 100%;
+    max-width: 250px;
+    border-radius: 8px;
+    display: grid;
+    grid-template-rows: auto 1fr;
+    box-shadow: 0px 0px 12px #e1e1e1;
+    position: relative;
+  }
 
 .products-container .carousel__slide {
   padding: 10px;
@@ -333,12 +388,27 @@ export default {
   color: var(--verde);
 }
 
-.specifications-content{
+.open {
+  height: max-content;
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
   grid-gap: 20px;
   padding: 20px;
   justify-items: stretch;
+  transition: all 300ms;
+}
+
+.open p{
+  display: block;
+}
+
+.close {
+  height: 0;
+  transition: all 300ms;
+}
+
+.close p{
+  display: none;
 }
 
 .specification{

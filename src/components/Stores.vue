@@ -1,8 +1,11 @@
 <template>
   <div class="mt-20 py-5 px-5 general">
     <div class="w-full flex items-center">
-      <div class="">
+      <div class="w-full flex justify-between items-center">
         <h2 class="text-2xl">Comercios destacados:</h2>
+        <router-link to="/stores" class="w-max">
+          <p class="text-lg" style="color: var(--morado)">Ver más</p>
+        </router-link>
       </div>
     </div>
     <div>

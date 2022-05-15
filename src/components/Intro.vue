@@ -18,9 +18,9 @@
         </p>
       </div>
       <div class="bt-intro mt-9 flex text-lg">
-        <div class="bt-toBuy font-semibold py-4 px-8 w-auto ml-0 mr-5">
+        <router-link to="/top" class="bt-toBuy font-semibold py-4 px-8 w-auto ml-0 mr-5">
           <p>COMPRAR AHORA</p>
-        </div>
+        </router-link>
         <div class="bt-toSell font-semibold py-4 px-8 w-auto ml-0">
           <p>VENDE AQUÍ</p>
         </div>

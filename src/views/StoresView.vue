@@ -1,60 +1,33 @@
 <template>
-  <div class="store-container w-full">
-    <div class="store-content pt-10">
-      <div class="title-container pb-10">
-        <div class="logo-container flex justify-center">
-          <div class="logo flex justify-center items-center rounded-full">
-            <p class="text-5xl text-gray-800 font-bold">Exito</p>
-          </div>
+  <div class="top-container w-full">
+    <div class="top-content">
+      <div class="title py-16 w-full text-center">
+        <p class="font-medium"> Las tiendas más <span class="font-bold">TOP</span> aquí </p>
+      </div>
+
+      <BannersStores/>
+
+      <div class="w-full mt-10 flex items-center">
+        <div class="">
+          <h2 class="text-2xl">Top en:</h2>
         </div>
-        <div class="title-content pl-5 flex justify-between">
-          <div class="h-full flex flex-col justify-center">
-            <p class="text-4xl font-bold">Tienda oficial: Éxito</p>
-            <p class="" style="color: var(--morado)">EN 2DAZO NUEVOS</p>
+        <div class="px-5 w-max m-0 mr-5 flex items-center py-2 seleccion cursor-pointer">
+          <div>
+            <p class="w-max m-0 font-semibold text-2xl">Tecnologia</p>
           </div>
-          <div class="h-full flex items-center">
-            <div class="mr-5">
-              <p class="text-3xl font-bold">+580</p>
-              <p class="font-semibold">Productos</p>
-            </div>
-            <div>
-              <p class="text-3xl font-bold">4.5/5</p>
-              <p class="font-semibold">Calificacion</p>
-            </div>
-          </div>
+          <svg v-if="selectA == false" class="ml-12 h-10 w-10 m-0" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/> </svg>
+          <svg v-else xmlns="http://www.w3.org/2000/svg" class="ml-12 h-10 w-10 m-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 15l7-7 7 7"/></svg>
         </div>
       </div>
-      <div class="info-container pr-5">
-        <div class="category-container w-full">
-          <p class="mb-5 text-2xl font-bold">Categorias</p>
-          <ul class="">
-            <li v-for="(category, index) in categories" :key="index" class="p-2 hover:bg-gray-100 rounded-lg cursor-pointer">{{ category.name }}</li>
-          </ul>
-        </div>
-        <div class="products-container">
-          <div v-for="product in products" :key="product.id" class="product-card">
-            <div class="tag-store">
-              <p class="text-xs text-white">Vendido por</p>
-            </div>
-            <div class="tag-logo">
-              <img src="../assets/logo-exito.png" alt="">
-            </div>
-            <div class="p-3">
-              <img class="rounded-lg" :src="product.mainImg" alt="">
-            </div>
 
-            <div class="px-4 pb-4">
-              <div class="mb-3 w-full borderText" ></div>
-              <div class="h-full">
-                <p class="name-product font-medium">{{ product.name }}</p>
-                <p class="text-left text-sm line-through text-gray-400 font-light">$ {{ product.price }}</p>
-                <div class="mb-2 flex justify-between items-center">
-                  <p class="discount-product text-left text-2xl font-bold">$ {{ product.priceDiscount }}</p>
-                  <p class="off-profuct text-sm font-bold">100% OFF</p>
-                </div>
-                <button class="button-buy py-2 w-full rounded-lg text-white">Comprar</button>
-              </div>
-            </div>
+      <div class="products-container">
+        <div v-for="product in products" @click="redirectStore(product.name)" :key="product.id" class="card flex justify-center items-end cursor-pointer">
+          <div class="comercio-logo flex justify-center items-center rounded-full">
+            <img class="rounded-full" :src="product.img" alt="">
+          </div>
+          <div class="comercio-content p-3 flex flex-col items-center justify-end rounded-lg">
+            <p class="text-2xl font-bold">{{ product.name }}</p>
+            <p class="text-sm">Categoria: <strong>{{ product.category }}</strong></p>
           </div>
         </div>
       </div>
@@ -63,138 +36,92 @@
 </template>
 
 <script>
-import productsServices from "../services/products/productsService";
-
+import BannersStores from "../components/BannersStores.vue"
+import router from '@/router'
 export default {
-  name: 'HomeView',
+  name: 'TopView',
   components: {
+    BannersStores,
   },
 
   data() {
     return {
-      categories: [
-        {name: "Ropa y accesorios"},
-        {name: "Consolas y Videojuegos"},
-        {name: "Ropa y accesorios"},
-        {name: "Consolas y Videojuegos"},
-        {name: "Ropa y accesorios"},
-        {name: "Consolas y Videojuegos"},
-        {name: "Ropa y accesorios"},
-        {name: "Consolas y Videojuegos"},
+      /* products: [], */
+      products:[
+        {name: "Puma", category: "Ropa y accesorios", img: "http://placeimg.com/640/480/cats"},
+        {name: "Exito", category: "General", img: "http://placeimg.com/640/480/cats"},
+        {name: "Alkosto", category: "General", img: "http://placeimg.com/640/480/cats"},
+        {name: "Logitech G", category: "Tecnologia", img: "http://placeimg.com/640/480/cats"},
+        {name: "Puma", category: "Ropa y accesorios", img: "http://placeimg.com/640/480/cats"},
+        {name: "Exito", category: "General", img: "http://placeimg.com/640/480/cats"},
+        {name: "Alkosto", category: "General", img: "http://placeimg.com/640/480/cats"},
+        {name: "Logitech G", category: "Tecnologia", img: "http://placeimg.com/640/480/cats"},
       ],
-      products: []
     }
   },
 
-  async mounted() {
-    this.getProducts()
+  methods: {
+    redirectStore(name){
+      router.push(`/store/${name.toLowerCase()}`)
+    }
   },
 
-  methods: {
-    getProducts() {
-      productsServices.get()
-        .then((response) => {
-          this.products = response.data;
-        })
-        .catch((e) => console.log(e));
-    },
-  },
 }
 </script>
 
 <style scoped>
-.store-content{
-  max-width: 1300px;
-  margin: 0 auto;
-  display: grid;
-  grid-template-rows: auto 1fr;
-}
+  .title p{
+    font-size: 65px;
+    color: var(--morado);
+  }
 
-.title-container{
-  display: grid;
-  grid-template-columns: auto 1fr;
-}
+  .title span {
+    color: var(--verde);
+  }
 
-.logo-container{
-  width: 250px;
-}
+  .top-content{
+    max-width: 1300px;
+    margin: 0 auto;
+  }
 
-.logo{
-  width: 200px;
-  height: 200px;
-  border: 5px solid white;
-  box-shadow: 0px 0px 12px #e1e1e1;
-  background-color: yellow;
-}
+  .products-container{
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    grid-gap: 20px;
+    padding: 20px;
+    justify-items: stretch;
+  }
 
-.info-container{
-  display: grid;
-  grid-template-columns: auto 1fr;
-}
+  .card {
+    height: 180px;
+    width: 100%;
+    max-width: 315px;
+    position: relative;
+  }
 
-.category-container{
-  width: 250px;
-}
+  .comercio-content{
+    width: 100%;
+    height: 130px;
+    /* position: absolute;
+    bottom: 0; */
+    box-shadow: 0px 0px 12px #e1e1e1;
+  }
 
-.products-container{
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
-  grid-gap: 20px;
-  padding: 20px;
-  justify-items: stretch;
-}
+  .comercio-content p {
+    color: var(--gris-oscuro);
+  }
 
-.product-card {
-  height: 350px;
-  width: 100%;
-  max-width: 250px;
-  border-radius: 8px;
-  display: grid;
-  grid-template-rows: auto 1fr;
-  box-shadow: 0px 0px 12px #e1e1e1;
-  position: relative;
-}
+  .comercio-logo{
+    width: 100px;
+    height: 100px;
+    border: 4px solid white;
+    box-shadow: 0px 0px 12px #e1e1e1;
+    position: absolute;
+    top: 0;
+  }
 
-.tag-store{
-  padding: 2px 10px;
-  top: 10px;
-  border-radius: 0 8px 8px 0;
-  position: absolute;
-  background: var(--morado);
-}
-
-.tag-logo{
-  width: max-content;
-  top: 2px;
-  right: 5px;
-  position: absolute;
-}
-
-.tag-logo img{
-  width: 100px;
-}
-
-.borderText{
-  border-bottom: 2px solid var(--morado);
-}
-
-.name-product{
-  max-width: 200px;
-  text-overflow: ellipsis;
-  overflow: hidden;
-  white-space: nowrap;
-  color: #666;
-}
-
-.discount-product{
-  color: var(--morado);
-}
-
-.button-buy{
-  background: var(--morado);
-}
-
-.off-profuct{
-  color: var(--verde);
-}
+  .comercio-logo img{
+    width: 90px;
+    height: 90px;
+  }
 </style>

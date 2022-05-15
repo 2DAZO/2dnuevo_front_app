@@ -1,15 +1,15 @@
 <template>
-   <div class="intro-top h-full py-5 px-5">
+   <div class="intro-top h-full lg:p-5">
       <Carousel
         class="h-full"
         :autoplay="4000"
         wrap-around="true"
-        :items-to-show="1.6"  
+        :items-to-show="1.2"  
         :settings="settings"
       >
         <Slide class="" v-for="banner in banners" :key="banner.id">
-          <div class="h-64" >
-            <img :src="banner.img" alt="" class="img-banner h-full px-2 object-cover rounded-xl" />
+          <div class="w-full h-64" >
+            <img :src="banner.img" alt="" class="img-banner h-full object-cover rounded-xl" />
           </div>
         </Slide>
       </Carousel>
@@ -60,6 +60,6 @@ export default {
 }
 
 .img-banner{
-  width: 785px;
+  width: 100%;
 }
 </style>
